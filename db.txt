@@ -1,0 +1,65 @@
+DELIMITER //
+
+CREATE PROCEDURE sp_create_employee (
+    IN p_name VARCHAR(255),
+    IN p_position VARCHAR(255),
+    IN p_department VARCHAR(255),
+    IN p_status VARCHAR(50)
+)
+BEGIN
+    INSERT INTO employees (name, position, department, status)
+    VALUES (p_name, p_position, p_department, p_status);
+END //
+
+DELIMITER ;
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE sp_get_all_employees()
+BEGIN
+    SELECT * FROM employees;
+END //
+
+DELIMITER ;
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE sp_get_employee(IN p_id INT)
+BEGIN
+    SELECT * FROM employees WHERE id = p_id;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE sp_update_employee_status(IN p_id INT, IN p_status VARCHAR(50))
+BEGIN
+    UPDATE employees
+    SET status = p_status
+    WHERE id = p_id;
+END //
+
+DELIMITER ;
+
+
+
+
+
+
+
+
+CREATE TABLE employees (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    position VARCHAR(100),
+    department VARCHAR(100),
+    status VARCHAR(50) DEFAULT 'Active'
+);
+
+
